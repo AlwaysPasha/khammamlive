@@ -3,616 +3,340 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khammam Live | Telangana</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khammam Live — Version 2</title>
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
-
 <style>
-:root {
-  --panel: rgba(12,19,29,.90);
-  --accent: #e8a64b;
-  --muted: #aebdcb;
-}
-
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #101820;
-  color: white;
-  font-family: Arial, sans-serif;
-}
-
-#map {
-  position: absolute;
-  inset: 0;
-}
-
-.topbar {
-  position: absolute;
-  z-index: 5;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
-  pointer-events: none;
-}
-
-.brand, .tools, .panel, .searchwrap, .placebar {
-  background: var(--panel);
-  border: 1px solid #ffffff25;
-  backdrop-filter: blur(14px);
-  border-radius: 14px;
-}
-
-.brand {
-  padding: 13px 17px;
-  pointer-events: auto;
-}
-
-.eyebrow {
-  color: var(--accent);
-  font-size: 10px;
-  letter-spacing: 3px;
-  font-weight: bold;
-}
-
-h1 {
-  margin: 4px 0;
-  font-size: 22px;
-}
-
-.sub {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 7px;
-  pointer-events: auto;
-}
-
-button {
-  cursor: pointer;
-  padding: 9px 12px;
-  border: 1px solid #ffffff25;
-  border-radius: 9px;
-  background: #ffffff12;
-  color: white;
-  font-weight: bold;
-}
-
-button:hover, button.active {
-  background: #e8a64b35;
-  border-color: var(--accent);
-}
-
-.searchwrap {
-  position: absolute;
-  z-index: 5;
-  top: 105px;
-  left: 16px;
-  width: min(350px, calc(100vw - 32px));
-  padding: 9px;
-  display: flex;
-  gap: 7px;
-}
-
-input {
-  flex: 1;
-  min-width: 0;
-  padding: 8px;
-  color: white;
-  background: transparent;
-  border: 0;
-  outline: none;
-  font-size: 14px;
-}
-
-input::placeholder { color: var(--muted); }
-
-.panel {
-  position: absolute;
-  z-index: 5;
-  top: 105px;
-  right: 16px;
-  width: 245px;
-  padding: 14px;
-}
-
-.panel h2 {
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  margin: 0 0 10px;
-}
-
-.places {
-  display: grid;
-  gap: 7px;
-}
-
-.places button {
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.places span {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.weather {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.weather small {
-  display: block;
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: normal;
-}
-
-.bottom {
-  position: absolute;
-  z-index: 5;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  pointer-events: none;
-}
-
-.placebar, .hint {
-  padding: 10px 13px;
-  font-size: 11px;
-  color: var(--muted);
-  pointer-events: auto;
-}
-
-.hint {
-  background: var(--panel);
-  border-radius: 10px;
-}
-
-.maplibregl-ctrl-group {
-  background: #101923dd !important;
-}
-
-@media(max-width:650px) {
-  .topbar { top: 9px; left: 9px; right: 9px; }
-  .brand { padding: 10px; }
-  h1 { font-size: 17px; }
-  .sub { display: none; }
-  .tools { max-width: 50%; }
-  .tools button { padding: 7px; font-size: 10px; }
-  .searchwrap { top: 85px; left: 9px; }
-  .panel {
-    top: auto;
-    bottom: 70px;
-    right: 9px;
-    width: 205px;
-    padding: 10px;
-  }
-  .bottom { bottom: 9px; left: 9px; right: 9px; }
-  .hint { display: none; }
+:root{--panel:rgba(10,18,29,.91);--accent:#e8a64b;--muted:#bdc8d2}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101820;color:#fff;font-family:Arial,sans-serif}
+#map{position:absolute;inset:0}
+.top{position:absolute;z-index:5;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;gap:10px;pointer-events:none}
+.brand,.tools,.panel,.search,.bottom{background:var(--panel);border:1px solid #ffffff25;backdrop-filter:blur(14px);border-radius:14px;box-shadow:0 8px 30px #0004}
+.brand{padding:12px 16px;pointer-events:auto}
+.eyebrow{font-size:10px;letter-spacing:3px;color:var(--accent);font-weight:bold}
+h1{font-size:21px;margin:4px 0}
+.sub{font-size:11px;color:var(--muted)}
+.tools{padding:7px;display:flex;gap:6px;flex-wrap:wrap;pointer-events:auto}
+button{background:#ffffff12;color:#fff;border:1px solid #ffffff30;border-radius:9px;padding:9px 11px;font-weight:bold;cursor:pointer}
+button:hover,button.active{border-color:var(--accent);background:#e8a64b35}
+.search{position:absolute;z-index:5;top:100px;left:14px;padding:8px;display:flex;gap:6px;width:min(350px,calc(100vw - 28px))}
+input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#fff;padding:8px;font-size:14px}
+input::placeholder{color:var(--muted)}
+.panel{position:absolute;z-index:5;right:14px;top:100px;width:230px;padding:13px}
+.panel h2{font-size:11px;color:var(--muted);letter-spacing:1px;margin:0 0 9px}
+.places{display:grid;gap:6px}
+.places button{text-align:left;display:flex;justify-content:space-between;gap:6px}
+.places span{font-size:10px;color:var(--muted)}
+.weather{font-size:23px;font-weight:bold}
+.weather small{display:block;font-size:11px;color:var(--muted);font-weight:normal}
+.bottom{position:absolute;z-index:5;bottom:14px;left:14px;right:14px;padding:10px 13px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:11px;color:var(--muted)}
+.status{color:#8ee0ad}
+.drivehelp{display:none}
+.drivehelp.show{display:block;color:#ffe0a8}
+.maplibregl-ctrl-group{background:#101923dd!important}
+.maplibregl-ctrl button span{filter:invert(1)}
+@media(max-width:680px){
+.top{top:8px;left:8px;right:8px}
+.brand{padding:9px}
+.brand h1{font-size:17px}
+.sub{display:none}
+.tools{max-width:55%;gap:4px}
+.tools button{padding:7px;font-size:10px}
+.search{top:82px;left:8px}
+.panel{top:auto;bottom:66px;right:8px;width:200px;padding:10px}
+.bottom{bottom:8px;left:8px;right:8px}
+.desktopHint{display:none}
 }
 </style>
 </head>
-
 <body>
 
 <div id="map"></div>
 
-<div class="topbar">
-  <div class="brand">
-    <div class="eyebrow">TELANGANA · INDIA</div>
-    <h1>KHAMMAM LIVE</h1>
-    <div class="sub">Explore the city · Streets and landmarks</div>
-  </div>
-
-  <div class="tools">
-    <button id="tilt" class="active">3D View</button>
-    <button id="day">Day</button>
-    <button id="night">Night</button>
-    <button id="home">⌂ Home</button>
-  </div>
+<div class="top">
+ <div class="brand">
+  <div class="eyebrow">TELANGANA · INDIA</div>
+  <h1>KHAMMAM LIVE</h1>
+  <div class="sub">Version 2 · Explore your city in 3D</div>
+ </div>
+ <div class="tools">
+  <button id="city" class="active">City view</button>
+  <button id="street">Street view</button>
+  <button id="drive">Drive mode</button>
+  <button id="day">Day</button>
+  <button id="night">Night</button>
+ </div>
 </div>
 
-<div class="searchwrap">
-  <input id="search" placeholder="Search Khammam locations...">
-  <button id="searchBtn">Search</button>
+<div class="search">
+ <input id="search" placeholder="Search a place in Khammam…">
+ <button id="searchBtn">Search</button>
 </div>
 
 <aside class="panel">
-  <h2>KHAMMAM HIGHLIGHTS</h2>
-
-  <div class="places">
-    <button data-place="fort">
-      Khammam Fort <span>Explore ↗</span>
-    </button>
-
-    <button data-place="lake">
-      Lakaram Lake <span>Explore ↗</span>
-    </button>
-
-    <button data-place="oldbus">
-      Old Bus Station <span>Explore ↗</span>
-    </button>
-
-    <button data-place="newbus">
-      New Bus Station <span>Explore ↗</span>
-    </button>
-
-    <button data-place="station">
-      Railway Station <span>Explore ↗</span>
-    </button>
-  </div>
-
-  <hr style="border:0;border-top:1px solid #ffffff25;margin:14px 0">
-
-  <h2>LOCAL WEATHER</h2>
-
-  <div class="weather">
-    <span id="weatherIcon">☀️</span>
-    <div>
-      <span id="temp">--°</span>
-      <small id="weatherText">Loading weather...</small>
-    </div>
-  </div>
+ <h2>EXPLORE KHAMMAM</h2>
+ <div class="places">
+  <button data-place="fort">Khammam Fort <span>↗</span></button>
+  <button data-place="lake">Lakaram Lake <span>↗</span></button>
+  <button data-place="oldbus">Old Bus Station <span>↗</span></button>
+  <button data-place="newbus">New Bus Station <span>↗</span></button>
+  <button data-place="station">Railway Station <span>↗</span></button>
+ </div>
+ <hr style="border:0;border-top:1px solid #ffffff25;margin:12px 0">
+ <h2>LOCAL WEATHER</h2>
+ <div class="weather">
+  <span id="weatherIcon">☀️</span>
+  <span id="temp">--°</span>
+  <small id="weatherText">Loading…</small>
+ </div>
 </aside>
 
 <div class="bottom">
-  <div class="placebar">
-    ● Khammam, Telangana
-    <span id="coords">17.2490° N, 80.1450° E</span>
-  </div>
-  <div class="hint">
-    Drag to move · Right click to rotate · Scroll to zoom
-  </div>
+ <div><span class="status">●</span> Khammam, Telangana · <span id="coords">17.2490° N, 80.1450° E</span></div>
+ <div class="desktopHint">Drag to move · Right-drag to rotate · Scroll to zoom</div>
+ <div id="drivehelp" class="drivehelp">Drive mode: use W/A/S/D or arrow keys · Exit with Drive mode</div>
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-
 <script>
+const center=[80.1450,17.2490];
 
-// KHAMMAM CITY CENTRE
-const center = [80.1450, 17.2490];
-
-// VERIFIED MAP-DATABASE LANDMARK COORDINATES
-// Coordinates are [longitude, latitude].
-
-const places = {
-
-  fort: {
-    name: "Khammam Fort",
-    center: [80.14588, 17.24629],
-    zoom: 17
-  },
-
-  lake: {
-    name: "Lakaram Lake",
-    center: [80.15903, 17.24811],
-    zoom: 16.5
-  },
-
-  oldbus: {
-    name: "TSRTC Old City Bus Station",
-    center: [80.14227, 17.25082],
-    zoom: 17
-  },
-
-  newbus: {
-    name: "TGSRTC New Bus Station",
-    center: [80.14956, 17.26095],
-    zoom: 17
-  },
-
-  station: {
-    name: "Khammam Railway Station",
-    center: [80.138491, 17.249347],
-    zoom: 17
-  }
-
+const places={
+ fort:{name:"Khammam Fort",center:[80.14588,17.24629],zoom:17},
+ lake:{name:"Lakaram Lake",center:[80.15903,17.24811],zoom:16.5},
+ oldbus:{name:"TSRTC Old City Bus Station",center:[80.14227,17.25082],zoom:17},
+ newbus:{name:"TGSRTC New Bus Station",center:[80.14956,17.26095],zoom:17},
+ station:{name:"Khammam Railway Station",center:[80.138491,17.249347],zoom:17}
 };
 
-// CREATE MAP
-const map = new maplibregl.Map({
-  container: "map",
-  style: "https://tiles.openfreemap.org/styles/liberty",
-  center: center,
-  zoom: 13.5,
-  pitch: 55,
-  bearing: -18,
-  antialias: true
+const map=new maplibregl.Map({
+ container:"map",
+ style:"https://tiles.openfreemap.org/styles/liberty",
+ center,
+ zoom:13.5,
+ pitch:58,
+ bearing:-18,
+ antialias:true
 });
 
-map.addControl(
-  new maplibregl.NavigationControl({
-    visualizePitch: true
-  }),
-  "bottom-right"
-);
+map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),"bottom-right");
+map.addControl(new maplibregl.ScaleControl({unit:"metric"}),"bottom-left");
 
-map.addControl(
-  new maplibregl.ScaleControl({
-    maxWidth: 100,
-    unit: "metric"
-  }),
-  "bottom-left"
-);
+let driveMode=false,car=[...center],heading=0,carMarker=null;
 
-// ADD LANDMARK MARKERS
-map.on("load", () => {
+map.on("load",()=>{
+ Object.entries(places).forEach(([key,p])=>{
+  new maplibregl.Marker({color:"#e8a64b"})
+   .setLngLat(p.center)
+   .setPopup(new maplibregl.Popup().setText(p.name))
+   .addTo(map);
+ });
 
-  Object.entries(places).forEach(([key, place]) => {
+ const style=map.getStyle();
+ const building=style.layers.find(l=>
+  l.type==="fill" && /building/i.test(l.id) && l.source && l["source-layer"]
+ );
 
-    const marker = new maplibregl.Marker({
-      color: "#e8a64b"
-    })
-    .setLngLat(place.center)
-    .setPopup(
-      new maplibregl.Popup().setText(place.name)
-    )
-    .addTo(map);
-
+ if(building){
+  map.addLayer({
+   id:"khammam-v2-3d-buildings",
+   source:building.source,
+   "source-layer":building["source-layer"],
+   type:"fill-extrusion",
+   minzoom:13,
+   filter:building.filter||["all"],
+   paint:{
+    "fill-extrusion-color":[
+     "interpolate",["linear"],
+     ["coalesce",["get","render_height"],["get","height"],8],
+     0,"#aab6bf",80,"#637889"
+    ],
+    "fill-extrusion-height":["coalesce",["get","render_height"],["get","height"],8],
+    "fill-extrusion-base":["coalesce",["get","render_min_height"],0],
+    "fill-extrusion-opacity":.88
+   }
   });
+ }
+});
 
-  // 3D BUILDINGS WHERE THE MAP DATA PROVIDES THEM
-  const layers = map.getStyle().layers || [];
+document.querySelectorAll("[data-place]").forEach(b=>{
+ b.onclick=()=>{
+  const p=places[b.dataset.place];
+  map.flyTo({
+   center:p.center,
+   zoom:p.zoom,
+   pitch:62,
+   bearing:-20,
+   duration:1700
+  });
+ };
+});
 
-  const building = layers.find(layer =>
-    layer.id.toLowerCase().includes("building") &&
-    layer.type === "fill" &&
-    layer.source &&
-    layer["source-layer"]
+document.getElementById("city").onclick=()=>{
+ stopDrive();
+ map.flyTo({center,zoom:13.5,pitch:58,bearing:-18,duration:1400});
+ setActive("city");
+};
+
+document.getElementById("street").onclick=()=>{
+ stopDrive();
+ map.flyTo({center,zoom:18.3,pitch:75,bearing:0,duration:1700});
+ setActive("street");
+};
+
+function setActive(id){
+ ["city","street","drive"].forEach(x=>
+  document.getElementById(x).classList.toggle("active",x===id)
+ );
+}
+
+document.getElementById("day").onclick=()=>{
+ map.easeTo({pitch:58,brightness:1});
+};
+
+document.getElementById("night").onclick=()=>{
+ map.easeTo({pitch:65,brightness:.65});
+};
+
+function startDrive(){
+ driveMode=true;
+ car=[...center];
+ heading=0;
+ setActive("drive");
+
+ map.flyTo({
+  center:car,
+  zoom:18.5,
+  pitch:78,
+  bearing:heading,
+  duration:1200
+ });
+
+ document.getElementById("drivehelp").classList.add("show");
+
+ if(!carMarker){
+  carMarker=new maplibregl.Marker({color:"#35c98a"})
+   .setLngLat(car)
+   .addTo(map);
+ }
+
+ carMarker.setLngLat(car);
+}
+
+function stopDrive(){
+ driveMode=false;
+ setActive("city");
+ document.getElementById("drivehelp").classList.remove("show");
+}
+
+document.getElementById("drive").onclick=()=>{
+ driveMode?stopDrive():startDrive();
+};
+
+document.addEventListener("keydown",e=>{
+ if(!driveMode)return;
+
+ const k=e.key.toLowerCase();
+
+ if(!["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(k))return;
+
+ e.preventDefault();
+
+ if(k==="a"||k==="arrowleft")heading-=12;
+ if(k==="d"||k==="arrowright")heading+=12;
+
+ const distance=(k==="s"||k==="arrowdown")?-0.00012:
+ ((k==="w"||k==="arrowup")?0.00012:0);
+
+ const rad=heading*Math.PI/180;
+
+ car[0]+=Math.sin(rad)*distance;
+ car[1]+=Math.cos(rad)*distance;
+
+ carMarker.setLngLat(car);
+
+ map.easeTo({
+  center:car,
+  bearing:heading,
+  duration:250
+ });
+});
+
+async function searchPlace(){
+ const q=document.getElementById("search").value.trim();
+
+ if(!q)return;
+
+ try{
+  const r=await fetch(
+   "https://nominatim.openstreetmap.org/search?format=json&limit=1&q="+
+   encodeURIComponent(q+", Khammam, Telangana, India"),
+   {headers:{"Accept-Language":"en"}}
   );
 
-  if (building && !map.getLayer("khammam-3d-buildings")) {
+  const d=await r.json();
 
-    map.addLayer({
-      id: "khammam-3d-buildings",
-      source: building.source,
-      "source-layer": building["source-layer"],
-      type: "fill-extrusion",
-      minzoom: 14,
-
-      paint: {
-        "fill-extrusion-color": "#8799a8",
-        "fill-extrusion-height": [
-          "coalesce",
-          ["get", "render_height"],
-          ["get", "height"],
-          8
-        ],
-        "fill-extrusion-base": [
-          "coalesce",
-          ["get", "render_min_height"],
-          0
-        ],
-        "fill-extrusion-opacity": 0.85
-      }
-
-    });
-
+  if(!d.length){
+   alert("Place not found. Try another search.");
+   return;
   }
 
-});
-
-// LANDMARK NAVIGATION
-document.querySelectorAll("[data-place]").forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    const place = places[button.dataset.place];
-
-    map.flyTo({
-      center: place.center,
-      zoom: place.zoom,
-      pitch: 60,
-      bearing: -20,
-      duration: 1800
-    });
-
-  });
-
-});
-
-// HOME BUTTON
-document.getElementById("home").onclick = () => {
+  const xy=[+d[0].lon,+d[0].lat];
 
   map.flyTo({
-    center: center,
-    zoom: 13.5,
-    pitch: 55,
-    bearing: -18,
-    duration: 1500
+   center:xy,
+   zoom:17,
+   pitch:62,
+   duration:1500
   });
 
-};
+  new maplibregl.Marker({color:"#58c99b"})
+   .setLngLat(xy)
+   .setPopup(new maplibregl.Popup().setText(d[0].display_name))
+   .addTo(map)
+   .togglePopup();
 
-// 3D VIEW
-document.getElementById("tilt").onclick = () => {
+ }catch(e){
+  alert("Search is temporarily unavailable.");
+ }
+}
 
-  const pitch = map.getPitch() > 30 ? 0 : 55;
+document.getElementById("searchBtn").onclick=searchPlace;
 
-  map.easeTo({
-    pitch: pitch,
-    duration: 900
-  });
+document.getElementById("search").addEventListener("keydown",e=>{
+ if(e.key==="Enter")searchPlace();
+});
 
-  document.getElementById("tilt")
-    .classList.toggle("active", pitch > 30);
-
-};
-
-// DAY / NIGHT MAP STYLE
-function setMapTheme(theme) {
-
-  const background = map.getStyle().layers.find(
-    layer => layer.type === "background"
+async function loadWeather(){
+ try{
+  const r=await fetch(
+   "https://api.open-meteo.com/v1/forecast?latitude=17.2490&longitude=80.1450&current=temperature_2m,weather_code&timezone=Asia%2FKolkata"
   );
 
-  if (background) {
-    map.setPaintProperty(
-      background.id,
-      "background-color",
-      theme === "night" ? "#101a2a" : "#dce5e8"
-    );
-  }
+  const d=await r.json();
+  const t=d.current.temperature_2m;
+  const c=d.current.weather_code;
 
-}
+  let label="Clear sky",icon="☀️";
 
-document.getElementById("day").onclick = () => {
-  setMapTheme("day");
-};
+  if(c>=1&&c<=3){label="Partly cloudy";icon="⛅";}
+  else if(c>=45&&c<=48){label="Fog";icon="🌫️";}
+  else if(c>=51&&c<=67){label="Rain";icon="🌧️";}
+  else if(c>=71&&c<=77){label="Snow";icon="❄️";}
+  else if(c>=80&&c<=82){label="Showers";icon="🌦️";}
+  else if(c>=95){label="Thunderstorm";icon="⛈️";}
 
-document.getElementById("night").onclick = () => {
-  setMapTheme("night");
-};
+  document.getElementById("temp").textContent=Math.round(t)+"°";
+  document.getElementById("weatherText").textContent=label+" · Khammam";
+  document.getElementById("weatherIcon").textContent=icon;
 
-// LOCATION SEARCH
-async function searchPlace() {
-
-  const query = document.getElementById("search").value.trim();
-
-  if (!query) return;
-
-  try {
-
-    const url =
-      "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
-      encodeURIComponent(query + ", Khammam, Telangana, India");
-
-    const response = await fetch(url, {
-      headers: {
-        "Accept-Language": "en"
-      }
-    });
-
-    const results = await response.json();
-
-    if (!results.length) {
-      alert("Location not found. Try another search.");
-      return;
-    }
-
-    const result = results[0];
-
-    const location = [
-      Number(result.lon),
-      Number(result.lat)
-    ];
-
-    map.flyTo({
-      center: location,
-      zoom: 17,
-      pitch: 55,
-      duration: 1500
-    });
-
-    new maplibregl.Marker({
-      color: "#58c99b"
-    })
-    .setLngLat(location)
-    .setPopup(
-      new maplibregl.Popup().setText(result.display_name)
-    )
-    .addTo(map)
-    .togglePopup();
-
-  } catch (error) {
-
-    alert("Search is temporarily unavailable.");
-
-  }
-
-}
-
-document.getElementById("searchBtn").onclick = searchPlace;
-
-document.getElementById("search").addEventListener(
-  "keydown",
-  event => {
-    if (event.key === "Enter") searchPlace();
-  }
-);
-
-// KHAMMAM WEATHER
-async function loadWeather() {
-
-  try {
-
-    const response = await fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=17.2490&longitude=80.1450&current=temperature_2m,weather_code&timezone=Asia%2FKolkata"
-    );
-
-    const data = await response.json();
-
-    const temperature = data.current.temperature_2m;
-    const code = data.current.weather_code;
-
-    let description = "Clear sky";
-    let icon = "☀️";
-
-    if (code >= 1 && code <= 3) {
-      description = "Partly cloudy";
-      icon = "⛅";
-    } else if (code >= 45 && code <= 48) {
-      description = "Fog";
-      icon = "🌫️";
-    } else if (code >= 51 && code <= 67) {
-      description = "Rain";
-      icon = "🌧️";
-    } else if (code >= 71 && code <= 77) {
-      description = "Snow";
-      icon = "❄️";
-    } else if (code >= 80 && code <= 82) {
-      description = "Showers";
-      icon = "🌦️";
-    } else if (code >= 95) {
-      description = "Thunderstorm";
-      icon = "⛈️";
-    }
-
-    document.getElementById("temp").textContent =
-      Math.round(temperature) + "°";
-
-    document.getElementById("weatherText").textContent =
-      description + " · Khammam";
-
-    document.getElementById("weatherIcon").textContent = icon;
-
-  } catch (error) {
-
-    document.getElementById("weatherText").textContent =
-      "Weather unavailable";
-
-  }
-
+ }catch(e){
+  document.getElementById("weatherText").textContent="Weather unavailable";
+ }
 }
 
 loadWeather();
-
 </script>
-
 </body>
 </html>
